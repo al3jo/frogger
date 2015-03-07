@@ -10,3 +10,9 @@ body {
     display: inline-block;
     padding: 0 10px;
 }
+
+.title {
+    color: cadetblue;
+    font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    font-size: 36px;
+}

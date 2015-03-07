@@ -39,7 +39,10 @@ function createNewPlayer() {
 
 // This interval handles the creation of enemies. New enemies will appear at the rate of this interval.
 var enemiesCreator = setInterval(function () {
-  if (!game.isPlaying) return;
+  if (!game.isPlaying) {
+    return;
+  }
+
   allEnemies.push(new Enemy());
 }, settings.timeForNextObject);
 

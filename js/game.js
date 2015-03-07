@@ -3,6 +3,13 @@
  */
 'use strict';
 
+// These are just a convenience set of variables that correspond to class and id names on the css/html.
+// The idea is that they are centralized here, so if a name changes, then the code just needs to be updated here.
+var score = 'score';
+var message = 'js-message';git
+var gamesPlayed = 'js-games-played';
+var gameStats = 'js-games-stats';
+
 /**
  * This creates a game object.
  */
@@ -11,18 +18,17 @@ var Game = function() {
   this.gamesWon = 0;
   this.gamesLost = 0;
   this.isPlaying = true;
-}
+};
 
 /**
  * Initialize the game state.
  */
 Game.prototype.init = function() {
-  this.currentLevel = settings.firstLevel;
   this.isPlaying = true;
-  document.getElementById('header').getElementsByClassName('js-message')[0].innerHTML = 'Game in progress...';
-  document.getElementById('header').getElementsByClassName('js-games-played')[0].innerHTML = this.gamesPlayed;
-  document.getElementById('header').getElementsByClassName('js-games-stats')[0].innerHTML = this.gamesWon + ' / ' + this.gamesLost;
-}
+  document.getElementById(score).getElementsByClassName(message)[0].innerHTML = 'Game in progress...';
+  document.getElementById(score).getElementsByClassName(gamesPlayed)[0].innerHTML = this.gamesPlayed;
+  document.getElementById(score).getElementsByClassName(gameStats)[0].innerHTML = this.gamesWon + ' / ' + this.gamesLost;
+};
 
 /**
  * Reset the game state. This is called when the game is over and should be prepared to start over.
@@ -37,7 +43,7 @@ Game.prototype.reset = function() {
   allEnemies.forEach(function(enemy) {
     enemy.isAlive = false;
   });
-}
+};
 
 /**
  * Called when a player wins a game, to update stats and reset the game.
@@ -45,11 +51,11 @@ Game.prototype.reset = function() {
 Game.prototype.win = function() {
   this.gamesWon++;
   this.isPlaying = false;
-  document.getElementById('header').getElementsByClassName('js-message')[0].innerHTML = 'You won!';
+  document.getElementById(score).getElementsByClassName(message)[0].innerHTML = 'You won! Restarting...';
 
   var self = this;
   setTimeout(function(){self.reset();}, settings.timeForNextObject);
-}
+};
 
 /**
  * Called when a game is lost, to update stats and reset the game.
@@ -57,20 +63,8 @@ Game.prototype.win = function() {
 Game.prototype.lost = function() {
   this.gamesLost++;
   this.isPlaying = false;
-  document.getElementById('header').getElementsByClassName('js-message')[0].innerHTML = 'You lost!';
+  document.getElementById(score).getElementsByClassName(message)[0].innerHTML = 'You lost! Restarting...';
 
   var self = this;
   setTimeout(function(){self.reset();}, settings.timeForNextObject);
-}
-
-/**
- * Advance the game to the next level.
- * This will adjust the settings so the difficulty is increased as the level gets higher.
- */
-Game.prototype.nextLevel = function() {
-  this.currentLevel++;
-  settings.enemySpeed -= game.currentLevel * settings.difficultyFactor;
-
-  console.log('Current level', this.currentLevel);
-  console.log('Current speed', settings.enemySpeed);
-}
+};

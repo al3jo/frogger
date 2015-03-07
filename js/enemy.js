@@ -19,7 +19,7 @@ var Enemy = function() {
   this.sprite = 'images/enemy-bug.png';
   this.isAlive = true;
   this.time = 0;
-}
+};
 
 /**
  * Update the enemy's position. It will update the column, cause the enemy is moving to the left.
@@ -29,7 +29,9 @@ var Enemy = function() {
  * @param dt The time, in milliseconds, that has passed since the last update.
  */
 Enemy.prototype.update = function(dt) {
-  if (!game.isPlaying) return;
+  if (!game.isPlaying) {
+    return;
+  }
   this.time += Math.round(dt * settings.paintInterval);
   if (this.time >= settings.enemySpeed) {
     this.time = 0;
@@ -40,7 +42,7 @@ Enemy.prototype.update = function(dt) {
       this.isAlive = false;
     }
   }
-}
+};
 
 /**
  * Draw the enemy on the screen. It computes the X coordinate with the current enemy's values.
@@ -48,4 +50,4 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
   var x = this.col * settings.step;
   ctx.drawImage(Resources.get(this.sprite), x, this.y);
-}
+};
