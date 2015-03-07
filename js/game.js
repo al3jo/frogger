@@ -6,7 +6,7 @@
 // These are just a convenience set of variables that correspond to class and id names on the css/html.
 // The idea is that they are centralized here, so if a name changes, then the code just needs to be updated here.
 var score = 'score';
-var message = 'js-message';git
+var message = 'js-message';
 var gamesPlayed = 'js-games-played';
 var gameStats = 'js-games-stats';
 
