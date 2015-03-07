@@ -1,3 +1,12 @@
 body {
     text-align: center;
 }
+
+.js-message {
+    color: red;
+}
+
+.row {
+    display: inline-block;
+    padding: 0 10px;
+}

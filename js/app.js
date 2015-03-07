@@ -31,27 +31,26 @@ createNewPlayer();
 
 // This function will create a player. If a player currently exists then it will notify about it.
 function createNewPlayer() {
-  if (player != undefined) {
-    var old = player;
-    console.log('player exists');
-    old = null;
+  if (player == undefined) {
+    player = new Player();
   }
-  player = new Player();
+  player.init();
 }
 
 // This interval handles the creation of enemies. New enemies will appear at the rate of this interval.
 var enemiesCreator = setInterval(function () {
+  if (!game.isPlaying) return;
   allEnemies.push(new Enemy());
 }, settings.timeForNextObject);
 
 // This listens for key presses and sends them to the player to react.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-    };
+  var allowedKeys = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+  };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+  player.handleInput(allowedKeys[e.keyCode]);
 });

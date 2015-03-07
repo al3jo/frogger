@@ -7,6 +7,10 @@
  * This creates a game object.
  */
 var Game = function() {
+  this.gamesPlayed = 1;
+  this.gamesWon = 0;
+  this.gamesLost = 0;
+  this.isPlaying = true;
 }
 
 /**
@@ -14,8 +18,10 @@ var Game = function() {
  */
 Game.prototype.init = function() {
   this.currentLevel = settings.firstLevel;
-  console.log('Current level', this.currentLevel);
-  console.log('Current speed', settings.enemySpeed);
+  this.isPlaying = true;
+  document.getElementById('header').getElementsByClassName('js-message')[0].innerHTML = 'Game in progress...';
+  document.getElementById('header').getElementsByClassName('js-games-played')[0].innerHTML = this.gamesPlayed;
+  document.getElementById('header').getElementsByClassName('js-games-stats')[0].innerHTML = this.gamesWon + ' / ' + this.gamesLost;
 }
 
 /**
@@ -24,7 +30,37 @@ Game.prototype.init = function() {
  */
 Game.prototype.reset = function() {
   this.init();
+  this.gamesPlayed++;
+
   settings.enemySpeed = 100;
+  player.init();
+  allEnemies.forEach(function(enemy) {
+    enemy.isAlive = false;
+  });
+}
+
+/**
+ * Called when a player wins a game, to update stats and reset the game.
+ */
+Game.prototype.win = function() {
+  this.gamesWon++;
+  this.isPlaying = false;
+  document.getElementById('header').getElementsByClassName('js-message')[0].innerHTML = 'You won!';
+
+  var self = this;
+  setTimeout(function(){self.reset();}, settings.timeForNextObject);
+}
+
+/**
+ * Called when a game is lost, to update stats and reset the game.
+ */
+Game.prototype.lost = function() {
+  this.gamesLost++;
+  this.isPlaying = false;
+  document.getElementById('header').getElementsByClassName('js-message')[0].innerHTML = 'You lost!';
+
+  var self = this;
+  setTimeout(function(){self.reset();}, settings.timeForNextObject);
 }
 
 /**

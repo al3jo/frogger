@@ -18,6 +18,6 @@ var Settings = function() {
   this.firstLevel = 1; // the first level of the game
 
   // Player initial settings
-  this.playerInitialRow = 1;
+  this.playerInitialRow = 0;
   this.playerInitialColumn = 2;
 }

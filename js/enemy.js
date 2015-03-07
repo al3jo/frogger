@@ -29,8 +29,8 @@ var Enemy = function() {
  * @param dt The time, in milliseconds, that has passed since the last update.
  */
 Enemy.prototype.update = function(dt) {
+  if (!game.isPlaying) return;
   this.time += Math.round(dt * settings.paintInterval);
-  console.log(this.time);
   if (this.time >= settings.enemySpeed) {
     this.time = 0;
     this.col++;
